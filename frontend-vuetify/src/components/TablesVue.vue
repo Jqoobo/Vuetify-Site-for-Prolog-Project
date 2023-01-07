@@ -5,7 +5,7 @@
         <v-table
     fixed-header
     class="w-50"
-    style="border: 1px solid #00BCD4; border-radius: 10px;"
+    style="border: 1px solid #00BCD4; border-radius: 20px;"
         >
     <thead>
       <tr>
