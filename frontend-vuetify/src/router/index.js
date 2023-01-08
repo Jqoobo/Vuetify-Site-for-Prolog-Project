@@ -26,21 +26,49 @@ const routes = [
         // route level code-splitting
         // this generates a separate chunk (about.[hash].js) for this route
         // which is lazy-loaded when the route is visited.
-        component: () => import(/* webpackChunkName: "home" */ '@/views/Login.vue'),
+        component: () => import(/* webpackChunkName: "login" */ '@/views/Login.vue'),
       },
     ],
   },
   {
-    path: '/tables',
+    path: '/employees-table',
     component: () => import('@/layouts/default/Default.vue'),
     children: [
       {
         path: '',
-        name: 'Tables',
+        name: 'Employees table',
         // route level code-splitting
         // this generates a separate chunk (about.[hash].js) for this route
         // which is lazy-loaded when the route is visited.
-        component: () => import(/* webpackChunkName: "home" */ '@/views/Tables.vue'),
+        component: () => import(/* webpackChunkName: "employees table" */ '@/views/EmployeeTable.vue'),
+      },
+    ],
+  },
+  {
+    path: '/products-table',
+    component: () => import('@/layouts/default/Default.vue'),
+    children: [
+      {
+        path: '',
+        name: 'Products table',
+        // route level code-splitting
+        // this generates a separate chunk (about.[hash].js) for this route
+        // which is lazy-loaded when the route is visited.
+        component: () => import(/* webpackChunkName: "procucts table" */ '@/views/ProductTable.vue'),
+      },
+    ],
+  },
+  {
+    path: '/orders-table',
+    component: () => import('@/layouts/default/Default.vue'),
+    children: [
+      {
+        path: '',
+        name: 'Orders table',
+        // route level code-splitting
+        // this generates a separate chunk (about.[hash].js) for this route
+        // which is lazy-loaded when the route is visited.
+        component: () => import(/* webpackChunkName: "orders table" */ '@/views/OrderTable.vue'),
       },
     ],
   },

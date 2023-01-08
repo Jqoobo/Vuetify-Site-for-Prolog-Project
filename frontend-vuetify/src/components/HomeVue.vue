@@ -8,28 +8,30 @@
         class="mb-5"
       />
 
-      <div class="text-body-3 font-weight-light mb-n1">GitHub links:</div>
+      <div class="text-body-1 font-weight-light mb-n1">GitHub links:</div>
+      <div class="ml-4">
       <v-btn
         color="secondary"
-        class="mt-5 mr-4"
-        href=""
+        class="mt-5"
+        href="https://github.com/Jqoobo"
         >
         Kuba
       </v-btn>
       <v-btn
         color="secondary"
-        class="mt-5 mr-4"
-        href=""
+        class="mt-5 ml-6 mr-6"
+        href="https://github.com/pu0238"
         >
         Michał
       </v-btn>
       <v-btn
         color="secondary"
         class="mt-5"
-        href=""
+        href="https://github.com/kacpulol"
         >
         Kacper
       </v-btn>
+      </div>
       <div class="py-14" />
 
       <v-row class="d-flex align-center justify-center">  

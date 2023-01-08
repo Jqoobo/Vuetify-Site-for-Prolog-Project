@@ -27,7 +27,7 @@
     <v-btn
       color="secondary"
       class="mr-4"
-      to="/tables"
+      to="/employees-table"
     >
       Zaloguj się
     </v-btn>

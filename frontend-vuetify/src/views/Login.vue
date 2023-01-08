@@ -1,8 +1,8 @@
- <template>
-   <Login/>
- </template>
+<template>
+  <Login/>
+</template>
 
  <script setup>
-   import Login from '@/components/loginVue.vue'
+   import Login from '@/components/LoginVue.vue'
  </script>
   

@@ -1,11 +1,30 @@
-<template>
-    <v-container class="fill-height">
+ <template>
+  <v-layout class="fill-height">
       <v-row class="d-flex align-center justify-center text-left fill-height">
-
+        <v-navigation-drawer>
+          <v-list color="#00BCD4">
+           <v-list-item class="nav-list-color" title="Pracownicy" to="/employees-table"></v-list-item>
+           <v-list-item class="nav-list-color" title="Produkty" to="/products-table"></v-list-item>
+           <v-list-item class="nav-list-color" title="Zamówienia" to="/orders-table"></v-list-item>
+        </v-list>
+        <template v-slot:append>
+          <div class="pa-2">
+            <v-btn 
+               block 
+               color="secondary"
+               to="/"
+            >
+              Wyloguj się
+            </v-btn>
+          </div>
+        </template>
+        </v-navigation-drawer>
         <v-table
-    fixed-header
-    class="w-50"
-    style="border: 1px solid #00BCD4; border-radius: 20px;"
+           fixed-header
+           density="compact"
+           class="w-50"
+           style="border: 1px solid #00BCD4;"
+      height="550px"
         >
     <thead>
       <tr>
@@ -24,7 +43,7 @@
         </th>
       </tr>
     </thead>
-    <tbody>
+    <tbody style="text-transform: capitalize;">
       <tr
         v-for="item in data"
         :key="item.id_pracownika"
@@ -33,14 +52,12 @@
         <td>{{ item.imiePracownika }}</td>
         <td>{{ item.nazwiskoPracownika }}</td>
         <td>{{ item.wiekPracownika }}</td>
-        <td></td>
       </tr>
     </tbody>
-  </v-table>
-      </v-row>
-    </v-container>
+       </v-table>
+        </v-row>
+   </v-layout>
   </template>
-  
   
 <script>
     import axios from 'axios'
