@@ -1,5 +1,3 @@
-# base
-
 ## Project setup
 
 ```
