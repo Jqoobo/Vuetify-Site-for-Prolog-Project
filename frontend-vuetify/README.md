@@ -1,3 +1,11 @@
+<p align="center">
+  <a href="https://next.vuetifyjs.com/en/" target="_blank">
+    <img alt="Vuetify Logo" width="100" src="https://vitejs.dev/logo-with-shadow.png">
+  </a>
+</p>
+
+<h2 align="center">Vite</h2>
+
 ## Project setup
 
 ```
