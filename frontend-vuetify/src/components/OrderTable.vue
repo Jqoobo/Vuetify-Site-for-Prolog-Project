@@ -53,7 +53,7 @@
     <tbody style="text-transform: capitalize;">
       <tr
         v-for="item in data"
-        :key="item.id_zamowienia"
+        :key="item.idZamowienia"
         
       >
         <td class="pa-5">{{ item.idZamowienia }}</td>
@@ -81,11 +81,6 @@
         </v-btn>
       </template>
        <v-form class="pa-15 bg-white dialog-form">
-            <v-text-field
-              v-model="idZamowienia"
-              label="ID zamówienia"
-              required
-            ></v-text-field>
             <v-text-field
               v-model="idProduktu "
               label="ID produktu"
@@ -141,7 +136,7 @@
       },
       methods: {
 
-        getItem() {
+        async getItem() {
         axios.get("http://localhost:3000/orders")
         .then((response) => {
           this.data = response.data;
@@ -149,16 +144,19 @@
         })
       },
 
-      deleteOrder(idZamowienia) {
-          axios.delete("http://localhost:3000/orders/"+idZamowienia)
+      async deleteOrder(idZamowienia) {
+        let x = window.confirm("Czy na pewno chcesz usunąć to zamówienie?");
+        if (x) {
+          axios.delete("http://localhost:3000/orders/" + idZamowienia)
           .then(() => {
           this.getItem();
+          alert("Zamówienie usunięte!");
         })
+      }
       },
       
-      addOrder(){
+      async addOrder(){
             axios.post('http://localhost:3000/orders', {
-              idZamowienia: this.idZamowienia,
               idProduktu: this.idProduktu,
               iloscProduktu: this.iloscProduktu,
               idMagazyniera: this.idMagazyniera,
@@ -172,10 +170,11 @@
             .catch(error => {
               console.log(error)
             })
+            alert("Zamówienie dodane!");
             window.location.reload();
           }
       },
-      mounted() {
+      async mounted() {
         this.getItem();
       },
     }

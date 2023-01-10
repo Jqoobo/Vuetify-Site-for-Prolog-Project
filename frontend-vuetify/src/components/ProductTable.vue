@@ -51,12 +51,14 @@
         </th>
         <th class="text-left">
         </th>
+        <th class="text-left">
+        </th>
       </tr>
     </thead>
     <tbody style="text-transform: capitalize;">
       <tr
         v-for="item in data"
-        :key="item.id_produktu"
+        :key="item.idProduktu"
       >
         <td class="pa-5">{{ item.idProduktu }}</td>
         <td>{{ item.nazwaProduktu }}</td>
@@ -65,6 +67,7 @@
         <td>{{ item.kolorProduktu  }}</td>
         <td>{{ item.stanMagazynowy }}</td>
         <td>{{ item.cenaProduktu }}</td>
+        <td><v-btn @click="editProduct(item)" color="secondary">Edytuj</v-btn></td>
         <td><v-btn @click="deleteProduct(item.idProduktu)" color="secondary">Usuń</v-btn></td>
       </tr>
     </tbody>
@@ -84,11 +87,6 @@
         </v-btn>
       </template>
        <v-form class="pa-15 bg-white dialog-form" >
-            <v-text-field
-              v-model="idProduktu"
-              label="ID Produktu"
-              required
-            ></v-text-field>
             <v-text-field
               v-model="nazwaProduktu"
               label="Nazwa produktu"
@@ -127,6 +125,49 @@
             </v-btn>
           </v-form>      
         </v-dialog>
+        <v-dialog
+       v-model="dialogUpdate"
+       width="500" 
+      >
+       <v-form class="pa-15 bg-white dialog-form" >
+            <v-text-field
+              v-model="item.nazwaProduktu"
+              label="Nazwa produktu"
+              required
+            ></v-text-field>
+            <v-text-field
+              v-model="item.typProduktu"
+              label="Typ produktu"
+              required
+            ></v-text-field>
+            <v-text-field
+              v-model="item.rozmiarProduktu"
+              label="Rozmiar produktu"
+              required
+            ></v-text-field>
+            <v-text-field
+              v-model="item.kolorProduktu"
+              label="Kolor produktu"
+              required
+            ></v-text-field>
+            <v-text-field
+              v-model="item.stanMagazynowy"
+              label="Stan magazynowy"
+              required
+            ></v-text-field>
+            <v-text-field
+              v-model="item.cenaProduktu"
+              label="Cena produktu"
+              required
+            ></v-text-field>
+            <v-btn
+              color="secondary"
+              @click="updateProduct"
+            >
+              Aktualizuj
+            </v-btn>
+          </v-form>      
+        </v-dialog>
         </v-row>
    </v-layout>
   </template>
@@ -138,6 +179,7 @@
       data(){
      return {
       data: [],
+      item: {},
       idProduktu: '',
       nazwaProduktu: '',
       typProduktu: '',
@@ -145,12 +187,13 @@
       kolorProduktu: '',
       stanMagazynowy: '',
       cenaProduktu: '',
-      dialog: false
+      dialog: false,
+      dialogUpdate: false
     }
       },
       methods: {
 
-        getItem() {
+        async getItem() {
         axios.get("http://localhost:3000/products")
         .then((response) => {
           this.data = response.data;
@@ -158,16 +201,19 @@
         })
       },
 
-      deleteProduct(idProduktu) {
-          axios.delete("http://localhost:3000/products/"+idProduktu)
+      async deleteProduct(idProduktu) {
+        let x = window.confirm("Czy na pewno chcesz usunąć ten produkt?");
+        if (x) {
+          axios.delete("http://localhost:3000/products/" + idProduktu)
           .then(() => {
           this.getItem();
+          alert("Produkt usunięty!");
         })
+      }
       },
       
-      addProduct(){
+      async addProduct(){
             axios.post('http://localhost:3000/products', {
-              idProduktu: this.idProduktu,
               nazwaProduktu: this.nazwaProduktu,
               typProduktu: this.typProduktu,
               rozmiarProduktu: this.rozmiarProduktu,
@@ -182,10 +228,42 @@
             .catch(error => {
               console.log(error)
             })
+            alert("Produkt dodany!");
             window.location.reload();
-          }
+          },
+
+          async updateProduct() {
+             axios.put("http://localhost:3000/products/" + this.item.idProduktu, {
+              nazwaProduktu: this.item.nazwaProduktu,
+              typProduktu: this.item.typProduktu,
+              rozmiarProduktu: this.item.rozmiarProduktu,
+              kolorProduktu: this.item.kolorProduktu,
+              stanMagazynowy: this.item.stanMagazynowy,
+              cenaProduktu: this.item.cenaProduktu
+
+             })
+             .then(response => {
+              console.log(response)
+            })
+            .catch(error => {
+              console.log(error)
+            })
+            alert("Dane produktu zostały zaktualizowane!");
+            window.location.reload();
+          },
+          async editProduct(item) {
+            console.log(item)
+            this.dialogUpdate = true;
+              this.item.idProduktu = item.idProduktu;
+              this.item.nazwaProduktu = item.nazwaProduktu;
+              this.item.typProduktu = item.typProduktu;
+              this.item.rozmiarProduktu = item.rozmiarProduktu;
+              this.item.kolorProduktu = item.kolorProduktu;
+              this.item.stanMagazynowy = item.stanMagazynowy;
+              this.item.cenaProduktu = item.cenaProduktu;
+          },
       },
-      mounted() {
+      async mounted() {
         this.getItem();
       },
     }

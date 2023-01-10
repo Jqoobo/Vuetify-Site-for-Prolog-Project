@@ -3,7 +3,7 @@
     <v-app-bar-title>
       <v-icon icon="mdi-vuetify" size="x-small" class="ml-15"/>
 
-      Prolog JS database integration - Project 2023
+      Prolog JS Database Integration - Project 2023
     </v-app-bar-title>
 
     <div class="mr-15">
