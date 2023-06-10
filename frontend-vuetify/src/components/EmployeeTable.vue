@@ -2,7 +2,7 @@
   <v-layout class="fill-height d-flex flex-row align-center justify-center">
       <v-row class="d-flex flex-column align-center justify-center text-left fill-height">
         <v-navigation-drawer>
-          <v-list color="#00BCD4">
+          <v-list color="#C70039">
            <v-list-item class="nav-list-color" title="Pracownicy" to="/employees-table"></v-list-item>
            <v-list-item class="nav-list-color" title="Produkty" to="/products-table"></v-list-item>
            <v-list-item class="nav-list-color" title="Zamówienia" to="/orders-table"></v-list-item>
@@ -19,12 +19,15 @@
           </div>
         </template>
         </v-navigation-drawer>
+        <v-main
+        class="w-100 d-flex flex-column align-center justify-center"
+        >
         <v-table
            fixed-header
            density="compact"
-           class="w-50"
-           style="border: 1px solid #00BCD4;"
-           height="550px"
+           class="w-75"
+           style="border: 1px solid #A7C7E7;"
+           height="800px"
         >
     <thead>
       <tr>
@@ -141,6 +144,7 @@
             </v-btn>
           </v-form>
           </v-dialog>
+        </v-main>
         </v-row>
    </v-layout>
   </template>

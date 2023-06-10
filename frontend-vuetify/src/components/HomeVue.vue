@@ -1,6 +1,6 @@
 <template>
   <v-container class="fill-height">
-    <v-responsive class="d-flex align-center text-center fill-height">
+    <v-responsive class=" text-center">
       <v-img
         contain
         height="150"
@@ -8,30 +8,15 @@
         class="mb-5"
       />
 
-      <div class="text-body-1 font-weight-light mb-n1">GitHub links:</div>
-      <div class="ml-4">
+      <div class="text-body-1 font-weight-light mb-n1">Link do GitHub'a:</div>
       <v-btn
         color="secondary"
-        class="mt-5"
+        class="mt-5 text-lowercase"
         href="https://github.com/Jqoobo"
+        target="_blank"
         >
-        Kuba
+        @kuba_rzz
       </v-btn>
-      <v-btn
-        color="secondary"
-        class="mt-5 ml-6 mr-6"
-        href="https://github.com/pu0238"
-        >
-        Michał
-      </v-btn>
-      <v-btn
-        color="secondary"
-        class="mt-5"
-        href="https://github.com/kacpulol"
-        >
-        Kacper
-      </v-btn>
-      </div>
       <div class="py-14" />
 
       <v-row class="d-flex align-center justify-center">  
