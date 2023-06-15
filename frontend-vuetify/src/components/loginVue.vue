@@ -6,27 +6,30 @@
             <v-form
     ref="form"
     lazy-validation
+    @submit.prevent="handleSubmit"
   >
+  <v-alert type="error" title="Błąd logowania" class="mb-5 text-left" v-if="error">{{ error }}</v-alert>
     <v-text-field
       :counter="10"
       :rules="nameRules"
       label="Login"
       required
+      v-model="username"
     ></v-text-field>
     <v-text-field
-            :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
-            :rules="[rules.required, rules.min]"
-            :type="show1 ? 'text' : 'password'"
-            name="input-10-2"
-            label="Hasło"
-            hint="Co najmniej 8 znaków"
-            class="input-group--focused mt-5"
-            @click:append="show1 = !show1"
+      :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
+      :type="show1 ? 'text' : 'password'"
+      name="input-10-2"
+      label="Hasło"
+      class="input-group--focused mt-5"
+      @click:append="show1 = !show1"
+      v-model="password"
+      :counter="10"
     ></v-text-field>
     <v-btn
       color="secondary"
       class="mr-4 mt-5"
-      to="/employees-table"
+      type="submit"
     >
       Zaloguj się
     </v-btn>
@@ -37,19 +40,34 @@
   </v-container>
  </template>
 
-<script> 
+<script>
+import axios from 'axios';
   export default {
+    // eslint-disable-next-line vue/multi-word-component-names
+    name:'Login',
     data () {
       return {
+        username:'',
+        password:'',
         show1: false,
-        password: 'Password',
-        rules: {
-          required: value => !!value || 'Wymagane',
-          min: v => v.length >= 8 || 'Co najmniej 8 znaków',
-          emailMatch: () => (`Hasło jest nieprawidłowe`),
-        },
+        error: '',
       }
     },
-  }
+    methods: {
+      async handleSubmit () {
+        try{
+        const response = await axios.post('http://localhost:3000/auth/login', {
+          username: this.username,
+          password: this.password
+        });
+        console.log(response.data);
+        localStorage.setItem('access_token', response.data.access_token);
+        this.$router.push('/employees-table');
+      } catch (e) {
+        this.error = 'Niepoprawny login lub hasło.';
+      }
+    },
+  },
+}
 </script>
 

@@ -13,6 +13,7 @@
                block 
                color="secondary"
                to="/"
+              @click="logout"
             >
               Wyloguj się
             </v-btn>
@@ -164,9 +165,9 @@
       idPracownika: '',
       dialog: false,
       dialogUpdate: false,
+      username: '',
     };
       },
-      
       methods: {
         async getItem() {
         axios.get("http://localhost:3000/employees")
@@ -229,9 +230,25 @@
               this.item.wiekPracownika = item.wiekPracownika;
               this.item.stanowisko = item.stanowisko;
           },
+        async logout() {
+        let x = window.confirm("Czy na pewno chcesz się wylogować?");
+        if (x == true) {
+        localStorage.removeItem('access_token');
+        alert("Wylogowano!");
+        this.$router.push('/');
+      }
+    }
       },
       async mounted() {
         this.getItem();
+      },
+      async created() {
+        const response = await axios.get('http://localhost:3000/profile', {
+          headers: {
+            Authorization: 'Bearer ' + localStorage.getItem('access_token')
+          }
+        });
+        console.log(response);
       },
       
     }
